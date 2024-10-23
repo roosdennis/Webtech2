@@ -16,5 +16,21 @@ class SharesContr extends Shares {
     public function getAllShares() {
         return $this->getShares();
     }
+
+    // Haal een specifieke share op via ID
+    public function getShareById($shareId) {
+        return $this->fetchShareById($shareId);
+    }
+
+    // Wijzig een share
+    public function updateShare($shareId, $title, $body, $link) {
+        $this->editShare($shareId, $title, $body, $link);
+    }
+
+    //Verwijder een share
+    public function deleteShare($shareId) {
+        $this->removeShare($shareId);
+    }
+
 }
 ?>

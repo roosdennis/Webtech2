@@ -9,12 +9,25 @@ class SharesView extends Shares {
         }
 
         foreach ($shares as $share) {
-            echo "<h3>" . htmlspecialchars($share['title']) . "</h3>";
-            echo "<p>" . htmlspecialchars($share['body']) . "</p>";
+            echo "<div class='card mb-3'>";
+            echo "<div class='card-body'>";
+            echo "<h3 class='card-title'>" . htmlspecialchars($share['title']) . "</h3>";
+            echo "<p class='card-text'>" . htmlspecialchars($share['body']) . "</p>";
+
             if (!empty($share['link'])) {
-                echo "<a href='" . htmlspecialchars($share['link']) . "'>Lees meer</a><br>";
+                echo "<a href='" . htmlspecialchars($share['link']) . "'>Lees meer</a>";
             }
-            echo "<hr>";
+
+            // "Bewereken" en "Verwijder" knoppen voor ingelogde gebruikers
+            if (isset($_SESSION['username'])) {
+                echo "<div class='d-flex flex-column align-items-end mt-3'>";
+                echo "<a href='/views/editshare.php?id=" . $share['id'] . "' class='btn btn-warning mb-2'>Bewerken</a>";
+                echo "<a href='/controllers/DeleteShareController.php?id=" . $share['id'] . "' class='btn btn-danger'>Verwijderen</a>";
+                echo "</div>";
+            }
+
+            echo "</div>";
+            echo "</div>";
         }
     }
 }

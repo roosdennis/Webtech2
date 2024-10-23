@@ -89,7 +89,6 @@ return "Goedenacht, " . htmlspecialchars($name);
     $sharesView->showShares();
     ?>
 </div>
-
 <!-- Footer -->
 <footer class="bg-dark text-white text-center py-3">
     &copy; 2024 ShareBoard
