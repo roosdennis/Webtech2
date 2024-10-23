@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     $userController->registerUser($username, $email, $password);
 
     // Succesvol geregistreerd
-    header("Location: ../views/register.php?register=success");
+    header("Location: ../index.php?register=success");
     exit();
 } else {
     // Als de gebruiker het formulier niet correct invult

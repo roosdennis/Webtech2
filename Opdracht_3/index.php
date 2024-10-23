@@ -3,6 +3,21 @@ session_start();
 
 // Voeg autoload toe voor het laden van klassen
 require_once 'includes/class-autoload.inc.php';
+
+// Functie om een passend welkomstbericht te geven op basis van de tijd
+function getWelcomeMessage($name) {
+$hour = date('H'); // Haal het huidige uur op (24-uursnotatie)
+
+if ($hour >= 5 && $hour < 12) {
+return "Goedemorgen, " . htmlspecialchars($name);
+} elseif ($hour >= 12 && $hour < 18) {
+return "Goedemiddag, " . htmlspecialchars($name);
+} elseif ($hour >= 18 && $hour < 22) {
+return "Goedenavond, " . htmlspecialchars($name);
+} else {
+return "Goedenacht, " . htmlspecialchars($name);
+}
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +60,24 @@ require_once 'includes/class-autoload.inc.php';
         </div>
     </div>
 </nav>
+
+<!-- Melding voor succesvolle registratie -->
+<div class="container mt-3">
+    <?php if (isset($_GET['register']) && $_GET['register'] == 'success'): ?>
+        <div class="alert alert-success" role="alert">
+            Dank voor de registratie! Je kunt nu inloggen.
+        </div>
+    <?php endif; ?>
+</div>
+
+<!-- Welkomstbericht bij succesvol inloggen -->
+<div class="container mt-3">
+    <?php if (isset($_GET['login']) && $_GET['login'] == 'success' && isset($_SESSION['username'])): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo getWelcomeMessage($_SESSION['username']); ?>! Welkom terug.
+        </div>
+    <?php endif; ?>
+</div>
 
 <!-- Sectie voor shares -->
 <div class="container mt-5">
