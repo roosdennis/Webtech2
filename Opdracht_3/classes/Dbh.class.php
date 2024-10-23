@@ -1,6 +1,6 @@
 <?php
 class Dbh {
-    private $dbPath = './db/shareboard.sqlite3';  // Path naar database in de 'db' map
+    private $dbPath = __DIR__ . '/../db/shareboard.sqlite3';  // Absoluut pad naar de database
 
     protected function connect() {
         $dsn = 'sqlite:' . $this->dbPath;

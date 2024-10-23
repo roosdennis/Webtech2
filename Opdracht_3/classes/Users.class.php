@@ -1,17 +1,26 @@
 <?php
-  class Users extends Dbh {
-    protected function getUser($naam) {
-      $sql = "SELECT * FROM users WHERE users_voor = ?";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$naam]);
-      // Use fetch() for 1 row, and fetchAll() for all rows
-      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $results;
+class Users extends Dbh {
+
+    // Methode om een nieuwe gebruiker toe te voegen
+    protected function setUser($username, $email, $hashedPwd) {
+        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$username, $email, $hashedPwd]);
     }
 
-    protected function setUser($voornaam, $achternaam, $gebdat) {
-      $sql = "INSERT INTO users(users_voor, users_achter, users_gebdat) VALUES (?, ?, ?)";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$voornaam, $achternaam, $gebdat]);
+    // Methode om te controleren of een gebruiker al bestaat
+    protected function checkUser($username, $email) {
+        $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$username, $email]);
+        return $stmt->fetch();
     }
-  }
+
+    // Haal gebruiker op met gebruikersnaam
+    protected function getUser($username) {
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$username]);
+        return $stmt->fetch();
+    }
+}

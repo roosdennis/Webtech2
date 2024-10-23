@@ -10,12 +10,12 @@
     <title>Document</title>
 </head>
 <body>
-  <?php
-    $usersObj = new UsersView();
-    echo $usersObj->showUser('Bas');
-    $usersObj2 = new UsersContr();
-    $usersObj2->createUser('Iet', 'Sanders', '1999-07-07');
-  ?>
-
+<!--  --><?php
+//    $usersObj = new UsersView();
+//    echo $usersObj->showUser('Bas');
+//    $usersObj2 = new UsersContr();
+//    $usersObj2->createUser('Iet', 'Sanders', '1999-07-07');
+//  ?>
+<h1>Welkom</h1>
 </body>
 </html>
