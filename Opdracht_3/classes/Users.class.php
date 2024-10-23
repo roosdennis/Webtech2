@@ -17,7 +17,7 @@ class Users extends Dbh {
     }
 
     // Haal gebruiker op met gebruikersnaam
-    protected function getUser($username) {
+    public function getUser($username) {
         $sql = "SELECT * FROM users WHERE username = ?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$username]);
